@@ -2,10 +2,67 @@
 <html>
 <head>
   <title>F-1 Feeder</title>
+  <link href="css/tables.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/bootstrap_include.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/layout.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/nav.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/buttons.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/base.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/breadcrumb.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/font1.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/search.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/avatar.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/badges.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/badges.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/form_el.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/res-1024.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/res-780.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="css/r-480.css" media="screen" rel="stylesheet" type="text/css">
 </head>
 
+
 <body ng-app="F1FeederApp">
-  <ng-view></ng-view>
+
+  <nav id="primary" class="main-nav main-menu" ng-controller="menuContr">
+
+    <div class="mobile-logo">
+      <img class="logo_480" src="images/main-logo-responsive.png"/>
+    </div>
+
+    <ul>
+      <li class="logo">
+        <a href="/f1feeder">
+           <img class="logo_1024" src="images/main-logo-smaller.png"/>
+           <img class="logo_768" src="images/main-logo-responsive.png"/>
+        </a>
+      </li>
+
+      <li ng-class="{active: menuActive == 'drivers'}">
+        <a href="/app/myDriverApp.html#">
+           <img src="images/drivers.png"/>
+           <span>Drivers</span>
+        </a>
+      </li>
+
+      <li ng-class="{active: menuActive == 'teams'}">
+        <a href="/app/myDriverApp.html#/teams">
+          <img src="images/teams.png"/>
+          <span>Teams</span>
+        </a>
+      </li>
+
+      <li ng-class="{active: menuActive == 'races'}">
+        <a href="/app/myDriverApp.html#/races">
+          <img src="images/races.png"/>
+          <span>Races</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section id="main">
+    <ng-view></ng-view>
+  </section>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="js/app.js"></script>
