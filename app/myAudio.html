@@ -1,0 +1,156 @@
+<html>
+<head>
+  <title>Audio Player</title>
+
+    <link href="css/tables.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap_include.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- <link href="css/layout.css" media="screen" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="css/nav.css" media="screen" rel="stylesheet" type="text/css"> -->
+    <link href="css/buttons.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/base.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- <link href="css/breadcrumb.css" media="screen" rel="stylesheet" type="text/css"> -->
+    <link href="css/font1.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- <link href="css/search.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/avatar.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/badges.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/badges.css" media="screen" rel="stylesheet" type="text/css"> -->
+    <link href="css/form_el.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/res-1024.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/res-780.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/r-480.css" media="screen" rel="stylesheet" type="text/css">
+      <link href="css/audio.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body ng-app="myAudioApp">
+<div ng-controller="AudioCtrl">
+  <div class="container-fluid main-content">
+    <div class="row-fluid">
+      <div class="span12">
+        <h2 class="main-titling">Welocme</h2>
+        <div class="row-fluid">
+          <div class="span12">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th colspan="4" class="tab-header tb-header-drivers">List of Songs</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="song in songs">
+
+                  <td><strong>
+	                	<a music-player="play" add-song="song">{{ song.title }}</a></strong></td>
+
+                  <td><button music-player add-song="song">+</button>
+          				</td>
+
+                  <td><button play-all="songs">Play all</button></td>
+                  <td><button play-all="songs" data-play="false">Add all</button></td>
+                </tr>
+
+                <tr  ng-show="songs == ''">
+                  <td class="loading_content">
+                    <img src="images/ajax-loader.gif" />
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
+
+
+  <progress id="progressBar" max="100" value="{{progress}}" class="html5" style="width:560px;">
+    <!-- Browsers that support HTML5 progress element will ignore the html inside `progress` element. Whereas older browsers will ignore the `progress` element and instead render the html inside it. -->
+    <div class="progress-bar">
+      <span ng-style="{width : ( progress + '%' ) }"></span>
+    </div>
+  </progress>
+
+        <!-- <div class="seekBase" seek-track>
+            <div class="seekLoad" ng-style="{width : ( progress + '%' ) }"></div>
+        </div> -->
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <div class="span12">
+      <div class="col-md-12">
+          <!-- init soundManager2 player -->
+          <sound-manager></sound-manager>
+
+          <p>
+              Currently Playing: {{ currentPlaying.title }} by {{ currentPlaying.artist }} ({{ currentPostion }} / {{ currentDuration }})
+          </p>
+
+
+          <br />
+          <p>
+            {{ currentDuration - currentPostion }}
+
+          </p>
+
+        </br>
+        <p style="color:white;">
+          {{ currentPostion | date:'HH:mm:ss'}}
+        </p>
+          <button play-music>Play</button>
+          -
+          <button pause-music>Pause</button>
+          -
+          <button stop-music>Stop</button>
+          -
+          <button repeat-music>Repeat ({{ repeat }})</button>
+          -
+          <button play-pause-toggle data-play="Play!" data-pause="Pause!">Play Toggle</button>
+
+          Is Playing: {{ isPlaying }}
+          <br/>
+          <br/>Volume: {{ volume }} -
+          <button music-volume data-type="increase">+</button>
+          -
+          <button music-volume data-type="decrease">-</button>
+          -
+          <button mute-music>Mute ({{ mute }})</button>
+          <br/>
+          <br/>
+          <button prev-track>Prev Track</button>
+          -
+          <button next-track>Next Track</button>
+          -
+          <button clear-playlist>Clear Playlist</button>
+          <br/>
+          <br/>
+          <h5>Playlist</h5>
+          <ul>
+              <li ng-repeat="song in playlist">
+                  <a play-from-playlist="song">{{ song.title }}</a>
+                  -
+                  <a remove-from-playlist="song" data-index="{{$index}}">
+                      <small>(remove)</small>
+                  </a>
+                  <span ng-if="currentPlaying.id == song.id"> - (current)</span>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+</div>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="moment.js"></script>
+  <script src="js/audioApp.js"></script>
+  <!-- <script src="js/services.js"></script> -->
+  <script src="js/audioController.js"></script>
+  <script src="../dist/angular-soundmanager2.js"></script>
+</body>
+</html>

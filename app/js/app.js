@@ -1,7 +1,8 @@
 angular.module('F1FeederApp', [
   'F1FeederApp.services',
   'F1FeederApp.controllers',
-  'ngRoute'
+  'ngRoute',
+  'angularSoundManager'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.
